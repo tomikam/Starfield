@@ -1,10 +1,26 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Starfield extends PApplet {
+
 Particle swarm[];
 int swarmLength = 3000;
 int speedMod = 10;
-float accelMod = 0.1;
+float accelMod = 0.1f;
 
 //your code here
-void setup()
+public void setup()
 {
 	//your code here
 	size(700, 700);
@@ -16,7 +32,7 @@ void setup()
 	
 	//swarm[50].myColor = color(255, 0, 0);
 }
-void draw()
+public void draw()
 {
 	//your code here
 	background(0);
@@ -29,7 +45,7 @@ void draw()
 	}
 
 }
-void mousePressed() {
+public void mousePressed() {
 	if (mouseButton  == LEFT) {
 		((OddballParticle)swarm[0]).myX = /*Math.random()*width*/width/8;
 		((OddballParticle)swarm[0]).myY = /*Math.random()*height*/width/2;
@@ -43,21 +59,21 @@ void mousePressed() {
 		}
 	}
 }
-void keyPressed() {
+public void keyPressed() {
 	if (key == 'q' || key == 'Q') {
 		speedMod +=1;
 	} else if ((key == 'a' || key == 'A') && speedMod > 1) {
 		speedMod -= 1;
 	} else if (key == 'w' || key == 'W') {
-		accelMod += 0.1;
+		accelMod += 0.1f;
 	} else if (key == 's' || key == 'S') {
-		accelMod -= 0.1;
+		accelMod -= 0.1f;
 	}
 }
 class NormalParticle implements Particle
 {
 	double myX, myY, myAngle, mySpeed;
-	color myColor;
+	int myColor;
 	NormalParticle() {
 		myX = /*Math.random()*width*/width/2;
 		myY = /*Math.random()*height*/height/2;
@@ -94,7 +110,7 @@ class OddballParticle implements Particle
 {
 	//your code here
 	double myX, myY, mySpeed, myAngle;
-	color myColor;
+	int myColor;
 	OddballParticle() {
 		myX = /*Math.random()**/width/8;
 		myY = /*Math.random()*height/8*/height/2;
@@ -139,3 +155,12 @@ class OddballParticle implements Particle
 //TESTING!!!
 
 //Particle mySize?
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Starfield" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
+}
