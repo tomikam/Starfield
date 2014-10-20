@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Starfield extends PApplet {
 
 Particle swarm[];
-int swarmLength = 3000;
+int swarmLength = 1000;
 int speedMod = 10;
 float accelMod = 0.1f;
 
