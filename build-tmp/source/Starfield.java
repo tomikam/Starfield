@@ -26,7 +26,8 @@ public void setup()
 	size(700, 700);
 	swarm = new Particle[swarmLength];
 	swarm[0] = new OddballParticle();
-	for (int i = 1; i < swarmLength; i ++) {
+	swarm[1] = new Jumbo();
+	for (int i = 2; i < swarmLength; i ++) {
 		swarm[i] = new NormalParticle();
 	}
 	
@@ -43,7 +44,6 @@ public void draw()
 		swarm[i].move();
 		swarm[i].show();
 	}
-
 }
 public void mousePressed() {
 	if (mouseButton  == LEFT) {
@@ -73,6 +73,7 @@ public void keyPressed() {
 class NormalParticle implements Particle
 {
 	double myX, myY, myAngle, mySpeed;
+	int mySize;
 	int myColor;
 	NormalParticle() {
 		myX = /*Math.random()*width*/width/2;
@@ -80,6 +81,7 @@ class NormalParticle implements Particle
 		myAngle = Math.random()* (2*PI);
 		mySpeed = Math.random()*speedMod;
 		myColor = color(155, 200, 120);
+		mySize = 5;
 	}
 	public void move() {
 		myX = myX + Math.cos((float)myAngle)*mySpeed;
@@ -96,7 +98,7 @@ class NormalParticle implements Particle
 	public void show() {
 		fill(myColor);
 		noStroke();
-		ellipse((float)myX, (float)myY, 5, 5);
+		ellipse((float)myX, (float)myY, mySize, mySize);
 	}
 	//your code here
 }
@@ -150,7 +152,14 @@ class OddballParticle implements Particle
 		popMatrix();
 	}
 }
-
+class Jumbo extends NormalParticle
+{
+	//int mySize;
+	Jumbo()
+	{
+		mySize = 25;
+	}
+}
 
 //TESTING!!!
 
